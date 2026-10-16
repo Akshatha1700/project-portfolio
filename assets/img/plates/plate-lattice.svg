@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <pattern id="lat-solid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M0 48 L48 0" fill="none" stroke="#B7A98C" stroke-width="1"/>
+    </pattern>
+    <pattern id="lat-dash" width="96" height="96" patternUnits="userSpaceOnUse">
+      <path d="M0 96 L96 0" fill="none" stroke="#36406B" stroke-width="1" stroke-dasharray="5 7"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="#E7DFCB"/>
+  <rect x="16" y="16" width="768" height="568" fill="url(#lat-solid)"/>
+  <rect x="16" y="16" width="768" height="568" fill="url(#lat-dash)"/>
+  <rect x="16" y="16" width="768" height="568" fill="none" stroke="#D3C8B1" stroke-width="1.5"/>
+  <g stroke="#B7A98C" stroke-width="1.5" fill="none">
+    <path d="M16 40 V16 H40"/>
+    <path d="M760 16 H784 V40"/>
+    <path d="M784 560 V584 H760"/>
+    <path d="M40 584 H16 V560"/>
+  </g>
+  <g fill="#8A5234">
+    <path d="M176 141 l9 9 l-9 9 l-9 -9 Z"/>
+    <path d="M400 291 l9 9 l-9 9 l-9 -9 Z"/>
+    <path d="M624 441 l9 9 l-9 9 l-9 -9 Z"/>
+    <path d="M176 441 l9 9 l-9 9 l-9 -9 Z"/>
+    <path d="M624 141 l9 9 l-9 9 l-9 -9 Z"/>
+  </g>
+</svg>

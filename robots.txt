@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# This site has no admin, no search and nothing to hide from crawlers.
+# Replace the domain below before deploying — see README.md.
+Sitemap: https://example.com/sitemap.xml

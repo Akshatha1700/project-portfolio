@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#E7DFCB"/>
+  <rect x="16" y="16" width="768" height="568" fill="none" stroke="#D3C8B1" stroke-width="1.5"/>
+  <g stroke="#B7A98C" stroke-width="1.5" fill="none">
+    <path d="M16 40 V16 H40"/>
+    <path d="M760 16 H784 V40"/>
+    <path d="M784 560 V584 H760"/>
+    <path d="M40 584 H16 V560"/>
+  </g>
+  <g fill="none" stroke="#36406B" stroke-width="1.2">
+    <circle cx="400" cy="300" r="30"/>
+    <circle cx="400" cy="300" r="54"/>
+    <circle cx="400" cy="300" r="78"/>
+    <circle cx="400" cy="300" r="102"/>
+    <circle cx="400" cy="300" r="126"/>
+    <circle cx="400" cy="300" r="150"/>
+    <circle cx="400" cy="300" r="174"/>
+    <circle cx="400" cy="300" r="198"/>
+    <circle cx="400" cy="300" r="222"/>
+    <circle cx="400" cy="300" r="246"/>
+  </g>
+  <g fill="none" stroke="#8A5234" stroke-width="1.2" stroke-dasharray="3 9">
+    <circle cx="400" cy="300" r="42"/>
+    <circle cx="400" cy="300" r="66"/>
+    <circle cx="400" cy="300" r="90"/>
+    <circle cx="400" cy="300" r="114"/>
+    <circle cx="400" cy="300" r="138"/>
+    <circle cx="400" cy="300" r="162"/>
+    <circle cx="400" cy="300" r="186"/>
+    <circle cx="400" cy="300" r="210"/>
+    <circle cx="400" cy="300" r="234"/>
+  </g>
+  <g stroke="#A98443" stroke-width="1.5">
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(0 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(30 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(60 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(90 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(120 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(150 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(180 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(210 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(240 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(270 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(300 400 300)"/>
+    <line x1="400" y1="50" x2="400" y2="36" transform="rotate(330 400 300)"/>
+  </g>
+  <circle cx="400" cy="300" r="7" fill="#8A5234"/>
+</svg>

@@ -1,0 +1,583 @@
+/* =====================================================================
+   base.css — reset, document defaults, typography, layout primitives.
+   Depends on: tokens.css
+   ===================================================================== */
+
+/* --- metric-compatible fallbacks ------------------------------------
+   These are declared with fake local families so the browser can use
+   real system fonts while the webfonts decode, with the same metrics.
+   The numbers are hand-tuned approximations, not measured per-glyph,
+   which is why they reduce layout shift rather than eliminate it. */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia"), local("Times New Roman");
+  size-adjust: 101%;
+  ascent-override: 91%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Manrope Fallback";
+  src: local("Segoe UI"), local("Arial");
+  size-adjust: 96%;
+  ascent-override: 104%;
+  descent-override: 27%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Fallback";
+  src: local("Consolas"), local("Courier New");
+  size-adjust: 100%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+/* --- reset ----------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* --- document -------------------------------------------------------- */
+html {
+  scroll-padding-top: calc(var(--header-h) + var(--space-m));
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  font-variation-settings: "wght" 400;
+  line-height: var(--leading-body);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Paper grain. A single very low-opacity fractal-noise layer over the
+   whole document stops the large paper fields from looking like flat
+   hexadecimal. It never receives pointer events. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  background-image: var(--grain-url);
+  background-repeat: repeat;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: multiply;
+}
+
+/* --- typography ------------------------------------------------------ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text);
+  text-wrap: balance;
+}
+
+/* The WONK axis swaps in the display alternates for f and g. Only the
+   largest cuts get it — at small sizes it just reads as a mistake. */
+h1,
+.h1,
+.display {
+  font-size: var(--step-6);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  font-variation-settings: "wght" 400, "SOFT" 0, "WONK" 1;
+}
+
+h2 {
+  font-size: var(--step-4);
+  font-variation-settings: "wght" 400, "SOFT" 0, "WONK" 1;
+}
+
+h3 {
+  font-size: var(--step-2);
+  font-variation-settings: "wght" 500, "SOFT" 0, "WONK" 0;
+}
+
+h4 {
+  font-size: var(--step-1);
+  font-variation-settings: "wght" 500, "SOFT" 0, "WONK" 0;
+}
+
+h5,
+h6 {
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-normal);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+p,
+li {
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+strong,
+b {
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+small {
+  font-size: var(--step--1);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  letter-spacing: var(--tracking-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+code {
+  background-color: var(--bg-sunken);
+  border: var(--rule-hairline) solid var(--border-faint);
+  border-radius: var(--radius-1);
+  padding: 0.1em 0.34em;
+}
+
+pre {
+  background-color: var(--bg-sunken);
+  border: var(--rule-hairline) solid var(--border);
+  border-radius: var(--radius-2);
+  padding: var(--space-s) var(--space-m);
+  overflow-x: auto;
+  line-height: 1.55;
+}
+
+pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+abbr[title] {
+  text-decoration: underline dotted var(--border-strong);
+  text-underline-offset: 0.22em;
+  cursor: help;
+}
+
+mark {
+  background-color: color-mix(in srgb, var(--ochre) 26%, transparent);
+  color: inherit;
+  padding: 0 0.15em;
+}
+
+/* --- links ----------------------------------------------------------- */
+a {
+  color: var(--link);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--underline);
+  text-underline-offset: 0.18em;
+  transition: color var(--dur-1) var(--ease-out),
+    text-decoration-color var(--dur-1) var(--ease-out),
+    text-decoration-thickness var(--dur-1) var(--ease-out);
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--underline-hover);
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-1);
+}
+
+/* --- lists ----------------------------------------------------------- */
+ul,
+ol {
+  padding-left: 1.15em;
+}
+
+li + li {
+  margin-top: 0.35em;
+}
+
+::marker {
+  color: var(--mark);
+  font-size: 0.9em;
+}
+
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+}
+
+/* --- rules ----------------------------------------------------------- */
+hr {
+  border: 0;
+  border-top: var(--rule-hairline) solid var(--border);
+  margin: var(--space-l) 0;
+}
+
+/* --- media ----------------------------------------------------------- */
+figure {
+  margin: 0;
+}
+
+iframe {
+  border: 0;
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+:target {
+  scroll-margin-top: calc(var(--header-h) + var(--space-m));
+}
+
+/* --- focus ----------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* =====================================================================
+   LAYOUT PRIMITIVES
+   ===================================================================== */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.wrap--wide {
+  max-width: var(--wrap-wide);
+}
+
+.wrap--narrow {
+  max-width: var(--wrap-narrow);
+}
+
+.stack > * + * {
+  margin-top: var(--flow, var(--space-m));
+}
+
+.stack--s {
+  --flow: var(--space-s);
+}
+.stack--l {
+  --flow: var(--space-l);
+}
+.stack--xl {
+  --flow: var(--space-xl);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-s));
+}
+
+.cluster--tight {
+  --cluster-gap: var(--space-2xs);
+}
+
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--space-l));
+}
+
+.section {
+  padding-block: var(--section-pad, var(--space-3xl));
+}
+
+.section--tight {
+  --section-pad: var(--space-2xl);
+}
+
+.section--flush {
+  --section-pad: 0;
+}
+
+.rule {
+  height: var(--rule-hairline);
+  border: 0;
+  background-color: var(--border);
+}
+
+/* --- small caps / eyebrow labels ------------------------------------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: var(--weight-500, 500);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+  font-variant-numeric: tabular-nums lining-nums;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.eyebrow::after {
+  content: "";
+  flex: 1 1 auto;
+  height: var(--rule-hairline);
+  background-color: var(--border);
+  min-width: 1.5rem;
+}
+
+.eyebrow--bare::after {
+  content: none;
+}
+
+.eyebrow > .num {
+  color: var(--mark);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.num {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: var(--measure-prose);
+}
+
+.prose {
+  max-width: var(--measure-prose);
+}
+
+.prose > * + * {
+  margin-top: var(--space-s);
+}
+
+.prose > * + h2,
+.prose > * + h3 {
+  margin-top: var(--space-xl);
+}
+
+.prose h2 {
+  font-size: var(--step-3);
+}
+
+.prose h3 {
+  margin-top: var(--space-l);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--mark);
+  padding-left: var(--space-m);
+  margin-block: var(--space-l);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.prose blockquote cite,
+.prose blockquote footer {
+  display: block;
+  margin-top: var(--space-s);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-style: normal;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.muted {
+  color: var(--text-secondary);
+}
+
+.dim {
+  color: var(--text-meta);
+}
+
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-variation-settings: "wght" 400, "SOFT" 0, "WONK" 1;
+  font-optical-sizing: auto;
+  float: left;
+  font-size: 3.35em;
+  line-height: 0.78;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--indigo-deep);
+}
+
+/* --- accessibility helpers ------------------------------------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  z-index: calc(var(--z-lightbox) + 1);
+  transform: translateY(-160%);
+  background-color: var(--indigo-deep);
+  color: var(--paper-0);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.7em 1.1em;
+  border-radius: var(--radius-2);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--paper-0);
+}
+
+/* =====================================================================
+   MOTION
+   Every animation on the site lives inside this media query, so the
+   reduced-motion path is a genuine off switch rather than a shortening.
+   ===================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* The base state is visible; js/site.js adds .reveal-ready to opt in,
+     so a JS failure can never leave content hidden. */
+  .reveal-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  .reveal-ready [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    transition: opacity var(--dur-3) var(--ease-out),
+      transform var(--dur-3) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <!-- Site mark: the jali eight-point star, same construction as the band,
+       with a terracotta centre. Scales down to 16px without collapsing. -->
+  <circle cx="24" cy="24" r="22.5" fill="none" stroke="#D3C8B1" stroke-width="1"/>
+  <g fill="none" stroke="#36406B" stroke-width="1.5">
+    <path d="M24 3 L45 24 L24 45 L3 24 Z"/>
+    <rect x="9.15" y="9.15" width="29.7" height="29.7"/>
+  </g>
+  <circle cx="24" cy="24" r="2.6" fill="#8A5234"/>
+</svg>

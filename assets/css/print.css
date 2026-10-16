@@ -1,0 +1,254 @@
+/* =====================================================================
+   print.css — the reading-on-paper case.
+   Loaded with media="print" so it never competes with the screen cascade.
+   ===================================================================== */
+
+@page {
+  margin: 18mm 16mm 20mm;
+}
+
+/* On paper the paper texture is noise, the palettes are ink-hungry, and
+   the floating chrome is meaningless. */
+html,
+body {
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 10.5pt !important;
+  line-height: 1.45 !important;
+}
+
+body::after {
+  display: none !important;
+}
+
+.site-header,
+.site-nav,
+.nav-toggle,
+.skip-link,
+.site-footer__legal,
+.footer-nav,
+.pager,
+.lightbox,
+.error-page__links {
+  display: none !important;
+}
+
+.print-only {
+  display: block !important;
+}
+
+main {
+  padding: 0 !important;
+}
+
+.wrap,
+.wrap--wide,
+.wrap--narrow {
+  max-width: none !important;
+  padding-inline: 0 !important;
+}
+
+/* Keep the typographic voice but flatten the colour to ink. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000 !important;
+  font-variation-settings: "wght" 500 !important;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 22pt !important;
+}
+
+h2 {
+  font-size: 15pt !important;
+  margin-top: 1.4em !important;
+}
+
+h3 {
+  font-size: 12pt !important;
+  margin-top: 1.2em !important;
+}
+
+.hero__title,
+.page-head__title,
+.case-hero__title,
+.error-page__code,
+.display {
+  font-size: 22pt !important;
+  color: #000 !important;
+}
+
+.hero__title em,
+.dropcap::first-letter {
+  color: #000 !important;
+}
+
+a,
+a:visited {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+/* Show where a link actually goes, but only inside running prose —
+   printing every nav and card link would be unreadable. */
+.prose a[href^="http"]::after,
+.footnotes a[href^="http"]::after,
+.references a[href^="http"]::after {
+  content: " (" attr(href) ")";
+  font-family: var(--font-mono);
+  font-size: 8.5pt;
+  word-break: break-all;
+}
+
+/* Floated margin notes go back into the text column. */
+.prose--case .note,
+.prose .note[data-sidenote] {
+  float: none !important;
+  width: auto !important;
+  margin: 0.8em 0 !important;
+  max-width: none !important;
+  border-left: 2pt solid #000 !important;
+  break-inside: avoid;
+}
+
+.note,
+.callout,
+.card,
+.entry,
+.spec,
+.footnotes li,
+.stat,
+.timeline li,
+.board__item,
+.run-chart,
+.milestones li {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Motifs: the jali band is a screen texture, but the kolam rule is a real
+   structural divider and survives — flattened to hairlines. */
+.jali-band,
+.plate::before,
+.plate::after {
+  display: none !important;
+}
+
+.kolam-rule {
+  height: 0 !important;
+  border-top: 0.5pt solid #999 !important;
+  background-image: none !important;
+  margin-block: 1.2em !important;
+}
+
+.plate,
+.plate > img,
+.project-card__media img {
+  border: 0.5pt solid #999 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  padding: 0 !important;
+  mix-blend-mode: normal !important;
+  box-shadow: none !important;
+  filter: grayscale(1) contrast(1.05);
+  break-inside: avoid;
+}
+
+figure {
+  break-inside: avoid;
+  margin-block: 1.2em;
+}
+
+figcaption,
+.figcaption {
+  color: #333 !important;
+  font-size: 9pt !important;
+}
+
+figcaption > .figcaption__num,
+.figcaption__num,
+.eyebrow,
+.meta,
+.card__num,
+.card__meta,
+.stat__label,
+.entry__meta,
+.stat__num,
+.milestones__value,
+.entry__num,
+.pullquote cite {
+  color: #444 !important;
+}
+
+.stat__num,
+.entry__num,
+.toc li::before,
+.footnotes li::before {
+  color: #000 !important;
+}
+
+.triptych__item,
+.stat,
+.timeline li::before,
+.tool-list li::before {
+  border-top-color: #999 !important;
+  border-color: #999 !important;
+}
+
+.card,
+.callout,
+.run-chart,
+.plate {
+  background: #fff !important;
+  border: 0.5pt solid #bbb !important;
+  box-shadow: none !important;
+}
+
+.card::after,
+.card:hover::after {
+  display: none !important;
+}
+
+/* Keep cards and entries in a readable single column rather than the
+   responsive grid, which collapses badly at page width. */
+.work-grid,
+.triptych,
+.board,
+.stat-grid,
+.timeline,
+.hero,
+.case-hero__body,
+.about-grid,
+.contact-grid,
+.run-panel,
+.split {
+  display: block !important;
+}
+
+.work-grid > *,
+.triptych > *,
+.board > *,
+.split > *,
+.case-hero__body > * {
+  margin-bottom: 1.2em;
+}
+
+.timeline li {
+  padding-left: 1.4em !important;
+}
+
+/* Print colophon — nobody prints a footer, so state the provenance here. */
+.print-colophon {
+  margin-top: 2em;
+  padding-top: 0.6em;
+  border-top: 0.5pt solid #999;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  color: #555;
+}

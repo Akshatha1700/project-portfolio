@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#E7DFCB"/>
+  <rect x="16" y="16" width="768" height="568" fill="none" stroke="#D3C8B1" stroke-width="1.5"/>
+  <g stroke="#B7A98C" stroke-width="1.5" fill="none">
+    <path d="M16 40 V16 H40"/>
+    <path d="M760 16 H784 V40"/>
+    <path d="M784 560 V584 H760"/>
+    <path d="M40 584 H16 V560"/>
+  </g>
+  <defs>
+    <g id="m1"><circle r="26" fill="none" stroke="#36406B" stroke-width="1.5"/></g>
+    <g id="m2"><path d="M0 -28 L28 0 L0 28 L-28 0 Z" fill="none" stroke="#8A5234" stroke-width="1.5"/></g>
+    <g id="m3" fill="#36406B">
+      <circle cx="-22" cy="-22" r="3"/><circle cx="0" cy="-22" r="3"/><circle cx="22" cy="-22" r="3"/>
+      <circle cx="-22" cy="0" r="3"/><circle cx="0" cy="0" r="3"/><circle cx="22" cy="0" r="3"/>
+      <circle cx="-22" cy="22" r="3"/><circle cx="0" cy="22" r="3"/><circle cx="22" cy="22" r="3"/>
+    </g>
+    <g id="m4"><rect x="-26" y="-26" width="52" height="52" fill="#A98443" opacity="0.5"/></g>
+    <g id="m5" fill="none" stroke="#5E6244" stroke-width="1.5">
+      <path d="M-24 -24 L24 24"/><path d="M24 -24 L-24 24"/>
+    </g>
+  </defs>
+  <g stroke="#D3C8B1" stroke-width="1">
+    <path d="M208 16 V584"/><path d="M400 16 V584"/><path d="M592 16 V584"/>
+    <path d="M16 236 H784"/><path d="M16 412 H784"/>
+  </g>
+  <use href="#m1" x="112" y="110"/><use href="#m2" x="304" y="110"/><use href="#m3" x="496" y="110"/><use href="#m4" x="688" y="110"/>
+  <use href="#m5" x="112" y="299"/><use href="#m4" x="304" y="299"/><use href="#m1" x="496" y="299"/><use href="#m2" x="688" y="299"/>
+  <use href="#m3" x="112" y="488"/><use href="#m5" x="304" y="488"/><use href="#m4" x="496" y="488"/><use href="#m1" x="688" y="488"/>
+</svg>

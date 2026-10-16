@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="24" viewBox="0 0 96 24">
+  <!-- Kolam loop: one continuous stroke that returns to its starting
+       gradient, so the tile joins seamlessly when repeated horizontally.
+       Ochre dots sit on the wave peaks, terracotta diamonds on the
+       centreline crossings. Used wherever a bare <hr> would otherwise go. -->
+  <path d="M0 12 C 8 2, 16 2, 24 12 S 32 22, 48 12 S 56 2, 72 12 S 80 22, 96 12"
+        fill="none" stroke="#B7A98C" stroke-width="1.25" stroke-linecap="round"/>
+  <g fill="#A98443">
+    <circle cx="12" cy="4.5" r="1.5"/>
+    <circle cx="60" cy="4.5" r="1.5"/>
+    <circle cx="36" cy="19.5" r="1.5"/>
+    <circle cx="84" cy="19.5" r="1.5"/>
+  </g>
+  <g fill="#8A5234">
+    <path d="M0 10.1 L1.9 12 L0 13.9 L-1.9 12 Z"/>
+    <path d="M24 10.1 L25.9 12 L24 13.9 L22.1 12 Z"/>
+    <path d="M48 10.1 L49.9 12 L48 13.9 L46.1 12 Z"/>
+    <path d="M72 10.1 L73.9 12 L72 13.9 L70.1 12 Z"/>
+    <path d="M96 10.1 L97.9 12 L96 13.9 L94.1 12 Z"/>
+  </g>
+</svg>

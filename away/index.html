@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Away from the desk — Akshatha Manjunath</title>
+<meta name="description" content="Running, an art and craft board, and the places I have hiked. The layouts are finished; the entries are still to be supplied.">
+<meta name="theme-color" content="#f7f3e9">
+<link rel="canonical" href="/away/">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Away from the desk — Akshatha Manjunath">
+<meta property="og:description" content="Running, an art and craft board, and the places I have hiked.">
+<meta property="og:url" content="/away/">
+
+<link rel="preload" href="/assets/fonts/fraunces-300-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap wrap--wide site-header__inner">
+    <a class="brand" href="/">
+      <img class="brand__mark" src="/assets/img/monogram.svg" alt="" width="48" height="48" decoding="async">
+      <span class="brand__text">
+        <span class="brand__name">Akshatha Manjunath</span>
+        <span class="brand__role">Student · projects &amp; research</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="nav">
+        <li><a class="nav__link" href="/projects/">Projects</a></li>
+        <li><a class="nav__link" href="/research/">Research</a></li>
+        <li><a class="nav__link" href="/about/">About</a></li>
+        <li><a class="nav__link" href="/away/" aria-current="page">Away</a></li>
+        <li><a class="nav__link" href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap wrap--wide">
+    <div class="page-head">
+      <p class="eyebrow"><span class="num">Off the desk</span> Away</p>
+      <h1 class="page-head__title">Running, making things, walking uphill</h1>
+      <p class="page-head__lede">
+        The other half of the notebook. Kept here mostly because the habit of
+        logging things turns out to be the same habit, and because a portfolio
+        that only shows finished software is a strange thing to hand somebody.
+      </p>
+      <div class="page-head__meta">
+        <span class="fill">total km run</span>
+        <span class="fill">pieces on the craft board</span>
+        <span class="fill">hikes logged</span>
+      </div>
+    </div>
+
+    <div class="slot" style="margin-top: var(--space-l)">
+      <span class="slot__label">To supply — the whole page, or delete the sections you do not want</span>
+      <p>
+        Three sections are laid out below: a run log with a chart, an art and
+        craft board, and a hike table. The layouts, the chart, the plate grid
+        and the table are finished. Every number, caption and entry is a
+        placeholder — none of the figures on this page are real, so nothing
+        here should be published until it is replaced.
+      </p>
+    </div>
+
+    <hr class="kolam-rule kolam-rule--space">
+  </div>
+
+  <!-- ============================================== RUNNING -->
+  <section class="wrap wrap--wide section section--flush" id="running" aria-labelledby="running-title" data-reveal>
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">№ 01</span> Running</p>
+      <div class="section-head__row">
+        <h2 class="section-head__title" id="running-title">Kilometres by month</h2>
+        <p class="meta"><span class="fill">where the totals come from</span></p>
+      </div>
+    </div>
+
+    <div class="slot" style="margin-bottom: var(--space-l)">
+      <span class="slot__label">To supply — the chart, or delete this whole section</span>
+      <p>
+        The bar heights below are a template drawing, not your data. Each month
+        is one <code>&lt;rect&gt;</code> in the SVG: change its <code>height</code>
+        and move its <code>y</code> to keep the bar sitting on the baseline at
+        <code>y=232</code>. Change the axis numbers in the
+        <code>chart__axis</code> group and the <code>&lt;title&gt;</code> to
+        match. If you would rather not plot anything, delete the
+        <code>run-panel</code> and keep only the milestone list.
+      </p>
+    </div>
+
+    <div class="run-panel">
+      <div class="run-chart">
+        <div class="run-chart__head">
+          <p class="run-chart__title">Distance per month</p>
+          <ul class="legend">
+            <li><span class="legend__swatch" style="background-color: var(--series-1)" aria-hidden="true"></span>Ordinary month</li>
+            <li><span class="legend__swatch" style="background-color: var(--series-2)" aria-hidden="true"></span>Race month</li>
+          </ul>
+        </div>
+
+        <svg class="chart" viewBox="0 0 760 280" role="img"
+             aria-labelledby="run-chart-title"
+             data-chart-animate preserveAspectRatio="xMidYMid meet">
+          <title id="run-chart-title">Template bar chart of monthly running distance: twelve bars on a shared baseline, none of them plotted from real data yet.</title>
+
+          <g class="chart__grid">
+            <line x1="48" y1="32" x2="740" y2="32"/>
+            <line x1="48" y1="99" x2="740" y2="99"/>
+            <line x1="48" y1="165" x2="740" y2="165"/>
+          </g>
+
+          <g class="chart__axis" text-anchor="end">
+            <text x="40" y="35">150</text>
+            <text x="40" y="102">100</text>
+            <text x="40" y="168">50</text>
+            <text x="40" y="235">0</text>
+          </g>
+
+          <g class="chart__bar">
+            <rect x="60" y="141" width="34" height="91"/>
+            <rect x="118" y="120" width="34" height="112"/>
+            <rect x="175" y="96" width="34" height="136"/>
+            <rect x="233" y="104" width="34" height="128"/>
+            <rect x="291" y="61" width="34" height="171"/>
+            <rect x="348" y="45" width="34" height="187"/>
+            <rect x="406" y="83" width="34" height="149"/>
+            <rect x="464" y="64" width="34" height="168"/>
+          </g>
+          <rect class="chart__bar chart__bar--alt" x="521" y="32" width="34" height="200"/>
+          <g class="chart__bar">
+            <rect x="579" y="93" width="34" height="139"/>
+            <rect x="637" y="123" width="34" height="109"/>
+            <rect x="695" y="168" width="34" height="64"/>
+          </g>
+
+          <line class="chart__baseline" x1="48" y1="232" x2="740" y2="232"/>
+          <line class="chart__baseline" x1="48" y1="20" x2="48" y2="232"/>
+
+          <g class="chart__axis" text-anchor="middle">
+            <text x="77" y="252">Jan</text>
+            <text x="135" y="252">Feb</text>
+            <text x="192" y="252">Mar</text>
+            <text x="250" y="252">Apr</text>
+            <text x="308" y="252">May</text>
+            <text x="365" y="252">Jun</text>
+            <text x="423" y="252">Jul</text>
+            <text x="481" y="252">Aug</text>
+            <text x="538" y="252">Sep</text>
+            <text x="596" y="252">Oct</text>
+            <text x="654" y="252">Nov</text>
+            <text x="712" y="252">Dec</text>
+          </g>
+        </svg>
+
+        <p class="meta" style="margin-top: var(--space-s)">
+          <span class="fill">the year these month labels refer to</span>
+        </p>
+      </div>
+
+      <div>
+        <h3 class="rail-block__title">Milestones</h3>
+        <ul class="milestones">
+          <li>
+            <span class="milestones__when"><span class="fill">month, year</span></span>
+            <span class="milestones__what"><span class="fill">what you did</span></span>
+            <span class="milestones__value"><span class="fill">time</span></span>
+          </li>
+          <li>
+            <span class="milestones__when"><span class="fill">month, year</span></span>
+            <span class="milestones__what"><span class="fill">what you did</span></span>
+            <span class="milestones__value"><span class="fill">time</span></span>
+          </li>
+          <li>
+            <span class="milestones__when"><span class="fill">month, year</span></span>
+            <span class="milestones__what"><span class="fill">what you did</span></span>
+            <span class="milestones__value"><span class="fill">distance</span></span>
+          </li>
+          <li>
+            <span class="milestones__when"><span class="fill">month, year</span></span>
+            <span class="milestones__what"><span class="fill">what you did</span></span>
+            <span class="milestones__value"><span class="fill">time</span></span>
+          </li>
+        </ul>
+        <p class="meta" style="margin-top: var(--space-m)">
+          <span class="fill">one line on what you are actually chasing</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap wrap--wide"><hr class="kolam-rule kolam-rule--space"></div>
+
+  <!-- ============================================== CRAFT -->
+  <section class="wrap wrap--wide section section--flush" id="craft" aria-labelledby="craft-title" data-reveal>
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">№ 02</span> Art &amp; craft board</p>
+      <div class="section-head__row">
+        <h2 class="section-head__title" id="craft-title">Things made with hands, not keystrokes</h2>
+        <p class="meta">Tap any plate to enlarge</p>
+      </div>
+    </div>
+
+    <div class="slot" style="margin-bottom: var(--space-l)">
+      <span class="slot__label">To supply — eight captions, or delete the plates you do not have</span>
+      <p>
+        The plates below are generated SVG placeholders, and the captions are
+        empty. Give each figure a real title, a one-line description and a year,
+        or delete the figure; the grid reflows to whatever is left. If you have
+        photographs, drop them in <code>assets/img/</code> and change the two
+        paths in each figure.
+      </p>
+    </div>
+
+    <div class="board">
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-waves.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-waves.svg" alt="Plate: six stacked wave lines, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-blocks.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-blocks.svg" alt="Plate: a grid of six block-print motifs, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-tiers.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-tiers.svg" alt="Plate: six stacked rectangular tiers, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-dots.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-dots.svg" alt="Plate: concentric rings of evenly spaced dots, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-contours.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-contours.svg" alt="Plate: nested contour ellipses, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-lattice.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-lattice.svg" alt="Plate: a diagonal lattice with dashed counter-diagonals, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-rings.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-rings.svg" alt="Plate: ten concentric rings with radial ticks, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+
+      <figure class="board__item">
+        <a class="plate" href="/assets/img/plates/plate-network.svg" data-lightbox>
+          <img src="/assets/img/plates/plate-network.svg" alt="Plate: seven connected nodes, standing in for a photograph of a piece you have made." width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        <figcaption class="board__caption">
+          <span class="board__title"><span class="fill">what it is</span></span>
+          <span class="board__meta"><span class="fill">technique · year</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="wrap wrap--wide"><hr class="kolam-rule kolam-rule--space"></div>
+
+  <!-- ============================================== HIKES -->
+  <section class="wrap wrap--wide section section--flush" id="hikes" aria-labelledby="hikes-title" data-reveal>
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">№ 03</span> Hiked places</p>
+      <div class="section-head__row">
+        <h2 class="section-head__title" id="hikes-title">Trips, logged the same way as everything else</h2>
+        <p class="meta"><span class="fill">where the numbers come from</span></p>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="split__aside">
+        <div class="slot">
+          <span class="slot__label">To supply — why you log this, or delete this aside</span>
+          <p>
+            One short paragraph on what the logging is for. It reads better
+            when it names the specific thing the numbers changed for you.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div class="table-scroll" role="region" aria-label="Hikes by distance and elevation gain" tabindex="0">
+        <table class="data-table hike-table">
+          <caption>Hikes, newest first — template rows. Replace every cell or delete the table.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Place</th>
+              <th scope="col">Range</th>
+              <th scope="col" class="num">Distance</th>
+              <th scope="col" class="num">Gain</th>
+              <th scope="col" class="num">When</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="fill">place</span></th>
+              <td><span class="fill">range</span></td>
+              <td class="num"><span class="fill">km</span></td>
+              <td class="num"><span class="fill">m</span></td>
+              <td class="num"><span class="fill">month year</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="fill">place</span></th>
+              <td><span class="fill">range</span></td>
+              <td class="num"><span class="fill">km</span></td>
+              <td class="num"><span class="fill">m</span></td>
+              <td class="num"><span class="fill">month year</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="fill">place</span></th>
+              <td><span class="fill">range</span></td>
+              <td class="num"><span class="fill">km</span></td>
+              <td class="num"><span class="fill">m</span></td>
+              <td class="num"><span class="fill">month year</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="fill">place</span></th>
+              <td><span class="fill">range</span></td>
+              <td class="num"><span class="fill">km</span></td>
+              <td class="num"><span class="fill">m</span></td>
+              <td class="num"><span class="fill">month year</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row"><span class="fill">how many</span></th>
+              <td><span class="fill">ranges</span></td>
+              <td class="num"><span class="fill">total km</span></td>
+              <td class="num"><span class="fill">total m</span></td>
+              <td class="num"><span class="fill">years</span></td>
+            </tr>
+          </tfoot>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <figure style="margin-top: var(--space-2xl)">
+      <a class="plate" href="/assets/img/plates/plate-contours.svg" data-lightbox>
+        <img src="/assets/img/plates/plate-contours.svg" alt="Plate: nested contour ellipses, standing in for an elevation map or a photograph from a trip." width="800" height="600" loading="lazy" decoding="async">
+      </a>
+      <figcaption>
+        <span class="figcaption__num">Fig. 1</span>
+        <span>A generated SVG plate standing in for a photograph. <em>Drop a real
+        image in <code>assets/img/</code> and change the two paths in this
+        figure, or delete the figure.</em></span>
+      </figcaption>
+    </figure>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="jali-band" aria-hidden="true"></div>
+  <div class="wrap wrap--wide site-footer__body">
+    <div class="stack" style="--flow: var(--space-m)">
+      <div class="site-footer__wordmark">
+        <img class="site-footer__mark" src="/assets/img/monogram.svg" alt="" width="48" height="48" loading="lazy" decoding="async">
+        <div>
+          <p class="brand__name">Akshatha Manjunath</p>
+          <p class="brand__role">Student · projects &amp; research</p>
+        </div>
+      </div>
+      <p class="site-footer__colophon">
+        A static journal. No framework, no build step, no analytics and no
+        cookies. Set in Fraunces, Manrope and IBM Plex Mono, all self-hosted.
+        Ornament is limited to a jali band and a kolam rule.
+      </p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <div>
+        <h2 class="footer-nav__title">Sections</h2>
+        <ul>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/research/">Research</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/away/">Away</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-nav__title">Write-ups</h2>
+        <ul>
+          <li><a href="/projects/project-01/">Project 01</a></li>
+          <li><a href="/projects/project-02/">Project 02</a></li>
+          <li><a href="/research/research-01/">Research 01</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-nav__title">Off the desk</h2>
+        <ul>
+          <li><a href="/away/#running">Running</a></li>
+          <li><a href="/away/#craft">Art &amp; craft</a></li>
+          <li><a href="/away/#hikes">Hiked places</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap wrap--wide site-footer__legal">
+    <p>© <span data-year>2026</span> Akshatha Manjunath</p>
+    <p>Hand-written HTML and CSS · set on paper ground #f7f3e9</p>
+  </div>
+
+  <div class="wrap wrap--wide print-only print-colophon">
+    Printed from akshatha&rsquo;s journal, with the unedited scaffolds in place.
+    Dashed boxes and monospaced fields are content still to be supplied.
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

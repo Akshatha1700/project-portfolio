@@ -1,0 +1,670 @@
+/* =====================================================================
+   pages.css — layouts that are specific to one page or one page type.
+   Depends on: tokens.css, base.css, components.css
+   ===================================================================== */
+
+/* =====================================================================
+   SHARED PAGE HEADER (every page except home)
+   ===================================================================== */
+.page-head {
+  padding-block: var(--space-2xl) var(--space-xl);
+  display: grid;
+  gap: var(--space-m);
+}
+
+.page-head__title {
+  font-size: var(--step-6);
+  max-width: 22ch;
+}
+
+.page-head__lede {
+  max-width: var(--measure-prose);
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.page-head__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-m);
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+  border-top: var(--rule-hairline) solid var(--border);
+  padding-top: var(--space-s);
+}
+
+/* ---------------------------------------------------------------------
+   Grid hardening.
+   A grid child's automatic minimum size is its min-content width, so one
+   wide table or unbreakable string can stretch a track past its container
+   and drag the whole document sideways. Every layout grid opts out, both
+   on the container (minmax(0, 1fr) instead of the implicit auto track)
+   and on the children (min-width: 0).
+   --------------------------------------------------------------------- */
+.split,
+.about-grid,
+.contact-grid,
+.run-panel,
+.case-hero__body,
+.triptych,
+.hero {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.split > *,
+.about-grid > *,
+.contact-grid > *,
+.run-panel > *,
+.case-hero__body > *,
+.triptych > *,
+.hero > *,
+.entry > *,
+.about-rail > * {
+  min-width: 0;
+}
+
+/* A short standfirst that prints the page's "shape" — used to make each
+   index feel like a section of a journal rather than a card dump. */
+.page-head__shape {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--space-m);
+  border-top: var(--rule-hairline) solid var(--border);
+  padding-top: var(--space-m);
+}
+
+/* =====================================================================
+   HOME
+   ===================================================================== */
+.hero {
+  padding-block: var(--space-2xl) var(--space-xl);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+}
+
+@media (min-width: 62rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}
+
+.hero__title {
+  font-size: var(--step-7);
+  max-width: 16ch;
+}
+
+.hero__title em {
+  font-style: italic;
+  font-variation-settings: "wght" 300, "SOFT" 40, "WONK" 1;
+  color: var(--indigo);
+}
+
+.hero__lede {
+  max-width: 42ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  align-items: center;
+}
+
+.hero__aside {
+  display: grid;
+  gap: var(--space-m);
+  border-left: 2px solid var(--border);
+  padding-left: var(--space-m);
+}
+
+@media (max-width: 62rem) {
+  .hero__aside {
+    border-left: 0;
+    border-top: var(--rule-hairline) solid var(--border);
+    padding-left: 0;
+    padding-top: var(--space-m);
+  }
+}
+
+.hero__aside-title {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.now-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-s);
+  font-size: var(--step--1);
+}
+
+.now-list li {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: var(--space-xs);
+  align-items: baseline;
+  margin-top: 0;
+}
+
+.now-list__what {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--mark);
+}
+
+/* asymmetric editorial split: sticky title, long body */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-l);
+}
+
+@media (min-width: 58rem) {
+  .split {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .split__aside {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-m));
+  }
+}
+
+.split__title {
+  font-size: var(--step-2);
+}
+
+/* three-up "what I'm doing" strip */
+.triptych {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-l);
+}
+
+@media (min-width: 52rem) {
+  .triptych {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.triptych__item {
+  display: grid;
+  gap: var(--space-xs);
+  padding-top: var(--space-s);
+  border-top: 2px solid var(--mark);
+}
+
+.triptych__item:nth-child(2) {
+  border-top-color: var(--olive);
+}
+
+.triptych__item:nth-child(3) {
+  border-top-color: var(--copper);
+}
+
+.triptych__label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.triptych__value {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.2;
+}
+
+.triptych__note {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* =====================================================================
+   CASE STUDY / LONG-FORM
+   ===================================================================== */
+.case-hero {
+  padding-block: var(--space-2xl) var(--space-l);
+  display: grid;
+  gap: var(--space-l);
+}
+
+.case-hero__title {
+  font-size: var(--step-6);
+  max-width: 30ch;
+}
+
+.case-hero__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+}
+
+@media (min-width: 62rem) {
+  .case-hero__body {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}
+
+.prose--case {
+  max-width: 42rem;
+}
+
+/* Sidenotes. On wide viewports a .note inside .prose is floated out into
+   the right margin; the zero-width outer box (width cancels margin) keeps
+   it out of the text column entirely, so no line is shortened. Below the
+   breakpoint the same note reads as an ordinary inline aside. */
+@media (min-width: 74rem) {
+  .prose--case .note,
+  .prose .note[data-sidenote] {
+    --sidenote-w: 16rem; /* content width of the note */
+    --sidenote-gap: var(--space-l); /* air between the text column and it */
+    float: right;
+    clear: right;
+    /* border box = content + the note's own left padding + its 2px rule */
+    width: calc(var(--sidenote-w) + var(--space-l) + 2px);
+    /* Negative margin wider than the box pushes the float clear of the
+       text column by exactly --sidenote-gap, so no line is shortened and
+       the rule never touches the last character on a line. */
+    margin-right: calc(
+      -1 * (var(--sidenote-w) + var(--space-l) + var(--sidenote-gap) + 2px)
+    );
+    margin-block: 0.3rem var(--space-s);
+    max-width: none;
+  }
+}
+
+.case-related {
+  margin-top: var(--space-2xl);
+}
+
+/* The jali band is used exactly twice outside the footer: under the home
+   header rule, and as the top edge of a case-study hero plate. The bare
+   variant drops its own hairlines so the plate's top border is the edge. */
+.case-figure {
+  gap: var(--space-s);
+}
+
+.case-figure > .jali-band + .plate {
+  margin-top: calc(-1 * var(--space-s));
+}
+
+.case-figure > .jali-band + .plate::before {
+  display: none;
+}
+
+/* =====================================================================
+   INDEX GRIDS
+   ===================================================================== */
+.work-grid {
+  display: grid;
+  gap: var(--space-l);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+}
+
+/* compact list of entries: number, title, blurb, meta */
+.entry-list {
+  list-style: none;
+  padding: 0;
+  border-top: var(--rule-hairline) solid var(--border);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xs);
+  padding-block: var(--space-m);
+  border-bottom: var(--rule-hairline) solid var(--border-faint);
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+
+@media (min-width: 52rem) {
+  .entry {
+    grid-template-columns: 3.25rem minmax(0, 1fr) 11rem;
+    gap: var(--space-m);
+    align-items: baseline;
+  }
+}
+
+.entry:hover {
+  background-color: color-mix(in srgb, var(--bg-raised) 70%, transparent);
+}
+
+.entry__num {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  color: var(--mark);
+}
+
+.entry__title {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.25;
+  font-variation-settings: "wght" 400, "SOFT" 0, "WONK" 0;
+}
+
+.entry__title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.entry__title a:hover {
+  color: var(--indigo-deep);
+  text-decoration: underline;
+  text-decoration-color: var(--underline-hover);
+}
+
+.entry__body {
+  margin-top: var(--space-2xs);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 52ch;
+}
+
+.entry__meta {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+  display: grid;
+  gap: 0.3em;
+}
+
+@media (min-width: 52rem) {
+  .entry__meta {
+    text-align: right;
+  }
+}
+
+/* =====================================================================
+   AWAY PAGE — running / craft / hikes
+   ===================================================================== */
+.run-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-l);
+}
+
+@media (min-width: 58rem) {
+  .run-panel {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}
+
+.run-chart {
+  background-color: var(--bg-raised);
+  border: var(--rule-hairline) solid var(--border);
+  border-radius: var(--radius-2);
+  padding: var(--space-m);
+}
+
+.run-chart__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-s);
+  margin-bottom: var(--space-s);
+}
+
+.run-chart__title {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.milestones {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-s);
+}
+
+.milestones li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  gap: var(--space-xs);
+  align-items: baseline;
+  margin-top: 0;
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--rule-hairline) solid var(--border-faint);
+  font-size: var(--step--1);
+}
+
+.milestones__when {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+}
+
+.milestones__what {
+  color: var(--text);
+}
+
+.milestones__value {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--mark);
+  white-space: nowrap;
+}
+
+.hike-table caption {
+  text-align: left;
+}
+
+/* =====================================================================
+   ABOUT
+   ===================================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 62rem) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}
+
+.about-rail {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 62rem) {
+  .about-rail {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-m));
+  }
+}
+
+.rail-block {
+  display: grid;
+  gap: var(--space-s);
+}
+
+.rail-block__title {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+  padding-bottom: var(--space-2xs);
+  border-bottom: var(--rule-hairline) solid var(--border);
+}
+
+.tool-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2xs);
+  font-size: var(--step--1);
+}
+
+.tool-list li {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: 0.6rem 1fr;
+  gap: var(--space-xs);
+  align-items: baseline;
+}
+
+.tool-list li::before {
+  content: "";
+  width: 0.35rem;
+  height: 0.35rem;
+  background-color: var(--mark);
+  transform: rotate(45deg) translateY(-1px);
+}
+
+/* =====================================================================
+   CONTACT
+   ===================================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 58rem) {
+  .contact-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+}
+
+.contact-address {
+  display: grid;
+  gap: var(--space-s);
+}
+
+.contact-address__value {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  word-break: break-word;
+}
+
+.copy-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.copy-status {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--olive);
+  min-height: 1.2em;
+}
+
+.link-list {
+  list-style: none;
+  padding: 0;
+  border-top: var(--rule-hairline) solid var(--border);
+}
+
+.link-list li {
+  margin-top: 0;
+  border-bottom: var(--rule-hairline) solid var(--border-faint);
+}
+
+.link-list a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding-block: var(--space-s);
+  text-decoration: none;
+  color: var(--text);
+  font-size: var(--step-0);
+}
+
+.link-list a:hover {
+  color: var(--indigo-deep);
+}
+
+.link-list__where {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+}
+
+.link-list a:hover .link-list__where {
+  color: var(--mark);
+}
+
+/* =====================================================================
+   404
+   ===================================================================== */
+.error-page {
+  padding-block: var(--space-3xl);
+  display: grid;
+  gap: var(--space-l);
+  justify-items: start;
+  max-width: 46rem;
+}
+
+.error-page__code {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "wght" 300, "SOFT" 60, "WONK" 1;
+  font-size: clamp(4.5rem, 18vw, 11rem);
+  line-height: 0.85;
+  color: var(--indigo-deep);
+  letter-spacing: -0.04em;
+}
+
+.error-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+.error-page__mark {
+  width: 3.5rem;
+  height: 3.5rem;
+  opacity: 0.5;
+}
+
+/* =====================================================================
+   PRINT-ONLY / SCREEN-ONLY HELPERS
+   ===================================================================== */
+.print-only {
+  display: none;
+}

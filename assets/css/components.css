@@ -1,0 +1,1414 @@
+/* =====================================================================
+   components.css — everything reusable, in the order it appears on a page.
+   Depends on: tokens.css, base.css
+   ===================================================================== */
+
+/* =====================================================================
+   1. SITE HEADER
+   ===================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background-color: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.1) blur(10px);
+  border-bottom: var(--rule-hairline) solid var(--border);
+}
+
+.site-header__inner {
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  text-decoration: none;
+  color: var(--text);
+  padding-block: var(--space-2xs);
+}
+
+.brand:hover {
+  color: var(--text);
+}
+
+.brand__mark {
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  transition: transform var(--dur-3) var(--ease-inout);
+}
+
+.brand:hover .brand__mark {
+  transform: rotate(45deg);
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  line-height: 1.1;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "wght" 500, "SOFT" 0, "WONK" 0;
+  font-size: var(--step-0);
+  letter-spacing: -0.01em;
+}
+
+.brand__role {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+/* On a narrow phone the role line cannot share the header with the name
+   and the menu button without wrapping, so it is dropped. The name and
+   the footer carry the same information. */
+@media (max-width: 30rem) {
+  .brand__role {
+    display: none;
+  }
+}
+
+/* --- primary nav ------------------------------------------------------ */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav li + li {
+  margin-top: 0;
+}
+
+.nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-secondary);
+  padding-block: 0.35em;
+  white-space: nowrap;
+}
+
+/* the underline is a pseudo-element so it can slide in from the left */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--accent-rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: var(--text);
+}
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.nav__link[aria-current="page"] {
+  color: var(--text);
+}
+
+.nav__link[aria-current="page"]::before {
+  content: "";
+  width: 0.4em;
+  height: 0.4em;
+  flex: 0 0 auto;
+  background-color: var(--mark);
+  transform: rotate(45deg);
+}
+
+.nav__link[aria-current="page"]::after {
+  transform: scaleX(1);
+  background-color: var(--mark);
+}
+
+/* --- mobile nav ------------------------------------------------------- */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-2xs);
+  background: none;
+  border: var(--rule-hairline) solid var(--border);
+  border-radius: var(--radius-2);
+  padding: 0.45em 0.75em;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.nav-toggle__bars {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  width: 14px;
+}
+
+.nav-toggle__bars i {
+  display: block;
+  height: 1px;
+  background-color: var(--text-secondary);
+  transition: transform var(--dur-2) var(--ease-out),
+    opacity var(--dur-1) linear;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars i:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars i:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+@media (max-width: 60rem) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background-color: var(--bg);
+    border-bottom: var(--rule-hairline) solid var(--border);
+    box-shadow: var(--shadow-1);
+    padding: var(--space-m) var(--gutter) var(--space-l);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition: opacity var(--dur-2) var(--ease-out),
+      transform var(--dur-2) var(--ease-out), visibility 0s linear var(--dur-2);
+  }
+
+  .site-nav[data-open="true"] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav__link {
+    padding-block: 0.7em;
+    border-bottom: 1px solid var(--border-faint);
+    font-size: var(--step-0);
+    letter-spacing: 0.1em;
+  }
+
+  .nav__link::after {
+    content: none;
+  }
+}
+
+/* =====================================================================
+   2. THE TWO ORNAMENTS
+   Both are external SVG tiles used as repeating backgrounds, so neither
+   can respond to currentColor — their stroke colours are baked in and
+   documented in README.md.
+   ===================================================================== */
+.jali-band {
+  height: var(--rule-motif-h);
+  background-image: var(--jali-band);
+  background-repeat: repeat-x;
+  background-position: center left;
+  background-size: auto 100%;
+  border-top: var(--rule-hairline) solid var(--border-faint);
+  border-bottom: var(--rule-hairline) solid var(--border-faint);
+}
+
+.jali-band--tight {
+  height: 1rem;
+}
+
+/* A rule with no hairlines of its own, for sitting between two borders. */
+.jali-band--bare {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.kolam-rule {
+  height: var(--rule-motif-h);
+  border: 0;
+  margin: 0;
+  background-color: transparent;
+  background-image: var(--kolam-rule);
+  background-repeat: repeat-x;
+  background-position: center left;
+  background-size: auto 100%;
+}
+
+.kolam-rule--space {
+  margin-block: var(--space-xl);
+}
+
+/* =====================================================================
+   3. SECTION FURNITURE
+   ===================================================================== */
+.section-head {
+  display: grid;
+  gap: var(--space-s);
+  margin-bottom: var(--space-xl);
+}
+
+.section-head__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-m);
+}
+
+.section-head__title {
+  font-size: var(--step-3);
+}
+
+.section-head__link {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  white-space: nowrap;
+}
+
+.section-head__link::after {
+  content: "\2192";
+  color: var(--mark);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.section-head__link:hover::after {
+  transform: translateX(3px);
+}
+
+/* =====================================================================
+   4. BUTTONS, CHIPS, TAGS
+   ===================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.8em 1.25em;
+  border: var(--rule-hairline) solid var(--border-strong);
+  border-radius: var(--radius-2);
+  background-color: transparent;
+  color: var(--text);
+  transition: background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+
+.btn:hover {
+  background-color: var(--bg-raised);
+  border-color: var(--mark);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.btn--primary {
+  background-color: var(--indigo-deep);
+  border-color: var(--indigo-deep);
+  color: var(--paper-0);
+}
+
+.btn--primary:hover {
+  background-color: var(--terracotta-deep);
+  border-color: var(--terracotta-deep);
+  color: var(--paper-0);
+}
+
+.btn--quiet {
+  border-color: transparent;
+  padding-inline: 0;
+  color: var(--link);
+}
+
+.btn--quiet:hover {
+  background-color: transparent;
+  border-color: transparent;
+  text-decoration: underline;
+  text-decoration-color: var(--underline-hover);
+  transform: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background-color: var(--bg-raised);
+  border: var(--rule-hairline) solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.4em 0.8em;
+  white-space: nowrap;
+}
+
+.chip--indigo {
+  color: var(--indigo);
+  border-color: color-mix(in srgb, var(--indigo) 30%, var(--border));
+}
+
+.chip--olive {
+  color: var(--olive);
+  border-color: color-mix(in srgb, var(--olive) 34%, var(--border));
+}
+
+.chip--mark {
+  color: var(--mark-strong);
+  border-color: color-mix(in srgb, var(--mark) 34%, var(--border));
+}
+
+.chip__dot {
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* =====================================================================
+   5. PLATES AND FIGURES
+   A "plate" is the house frame for any image: a paper mat, one hairline,
+   and two registration marks at opposing corners.
+   ===================================================================== */
+.plate {
+  position: relative;
+  display: block;
+  background-color: var(--bg-sunken);
+  border: var(--rule-hairline) solid var(--border);
+  border-radius: var(--radius-1);
+  padding: var(--space-2xs);
+  box-shadow: var(--shadow-inset);
+}
+
+.plate > img,
+.plate > svg {
+  width: 100%;
+  height: auto;
+  border-radius: 1px;
+  background-color: var(--bg-sunken);
+}
+
+.plate::before,
+.plate::after {
+  content: "";
+  position: absolute;
+  width: 0.7rem;
+  height: 0.7rem;
+  pointer-events: none;
+  border-style: solid;
+  border-color: var(--border-strong);
+}
+
+.plate::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.plate::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.plate--flush {
+  padding: 0;
+}
+
+.plate--flush > img {
+  border-radius: 0;
+}
+
+figure {
+  display: grid;
+  gap: var(--space-s);
+}
+
+figure + figure {
+  margin-top: var(--space-xl);
+}
+
+.figcaption,
+figcaption {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-xs);
+  align-items: baseline;
+  max-width: var(--measure-wide);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.figcaption__num,
+figcaption > .figcaption__num {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--mark);
+  white-space: nowrap;
+}
+
+/* =====================================================================
+   6. CARDS
+   ===================================================================== */
+.card {
+  position: relative;
+  display: grid;
+  gap: var(--space-s);
+  background-color: var(--bg-raised);
+  border: var(--rule-hairline) solid var(--border);
+  border-radius: var(--radius-2);
+  padding: var(--space-m);
+  transition: border-color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-1);
+}
+
+.card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.card__num {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  color: var(--mark);
+}
+
+.card__title {
+  font-size: var(--step-2);
+}
+
+.card__title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* the whole card is clickable via a stretched link on the title */
+.card__title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card:hover .card__title a {
+  color: var(--indigo-deep);
+  text-decoration: underline;
+  text-decoration-color: var(--underline-hover);
+}
+
+.card__body {
+  color: var(--text-secondary);
+  font-size: var(--step--1);
+  line-height: 1.6;
+}
+
+.card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+  border-top: var(--rule-hairline) solid var(--border-faint);
+  padding-top: var(--space-s);
+}
+
+.card__meta > * + *::before {
+  content: "·";
+  margin-right: var(--space-xs);
+  color: var(--border-strong);
+}
+
+.card--row {
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+/* ornamental corner that only reveals on hover — detail, not decoration */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--mark);
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.card:hover::after,
+.card:focus-within::after {
+  transform: rotate(45deg) scale(1);
+}
+
+/* project card with a plate on top */
+.project-card {
+  padding: 0;
+  background-color: var(--bg-raised);
+  overflow: hidden;
+}
+
+.project-card__media {
+  position: relative;
+  border-bottom: var(--rule-hairline) solid var(--border);
+  background-color: var(--bg-sunken);
+}
+
+.project-card__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.015);
+}
+
+.project-card__body {
+  display: grid;
+  gap: var(--space-s);
+  padding: var(--space-m);
+}
+
+/* =====================================================================
+   7. SPEC TABLE (definition-list based, not a <table>)
+   ===================================================================== */
+.spec {
+  display: grid;
+  gap: 0;
+  border-top: var(--rule-hairline) solid var(--border);
+  font-size: var(--step--1);
+}
+
+.spec__row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 10rem) 1fr;
+  gap: var(--space-s);
+  padding-block: var(--space-xs);
+  border-bottom: var(--rule-hairline) solid var(--border-faint);
+  align-items: baseline;
+}
+
+.spec dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.spec dd {
+  margin: 0;
+  color: var(--text);
+}
+
+.spec dd .meta {
+  display: block;
+  margin-top: 0.15em;
+}
+
+/* Scroll container for wide tables. Tables cannot shrink below the
+   min-content width of their cells, so on a narrow viewport this is what
+   stops them pushing the whole document sideways. `tabindex="0"` in the
+   markup makes the region reachable by keyboard (WCAG 2.1.1). */
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.table-scroll:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* a real <table>, for tabular data only */
+.data-table {
+  width: 100%;
+  font-size: var(--step--1);
+  border-top: var(--rule-hairline) solid var(--border);
+}
+
+.data-table caption {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+  padding-bottom: var(--space-s);
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: var(--space-2xs) var(--space-s) var(--space-2xs) 0;
+  border-bottom: var(--rule-hairline) solid var(--border-faint);
+  vertical-align: baseline;
+}
+
+.data-table th {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+  font-weight: 400;
+  border-bottom-color: var(--border);
+  white-space: nowrap;
+}
+
+.data-table td.num,
+.data-table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.data-table tbody tr:hover {
+  background-color: color-mix(in srgb, var(--bg-raised) 60%, transparent);
+}
+
+/* =====================================================================
+   8. FOOTNOTES AND MARGIN NOTES
+   ===================================================================== */
+.fn-ref {
+  font-family: var(--font-mono);
+  font-size: 0.7em;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-decoration: none;
+  color: var(--mark-strong);
+  border-bottom: 1px solid color-mix(in srgb, var(--mark) 45%, transparent);
+  padding: 0 0.15em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.fn-ref:hover {
+  color: var(--paper-0);
+  background-color: var(--mark-strong);
+  border-bottom-color: var(--mark-strong);
+}
+
+.footnotes {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-m);
+  border-top: var(--rule-hairline) solid var(--border);
+}
+
+.footnotes__title {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-bottom: var(--space-s);
+}
+
+.footnotes ol {
+  list-style: none;
+  padding: 0;
+  counter-reset: fn;
+  display: grid;
+  gap: var(--space-xs);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: var(--measure-wide);
+}
+
+.footnotes li {
+  counter-increment: fn;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--space-2xs);
+  margin-top: 0;
+}
+
+.footnotes li::before {
+  content: counter(fn);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--mark);
+  padding-top: 0.15em;
+}
+
+.footnotes li:target {
+  background-color: color-mix(in srgb, var(--ochre) 14%, transparent);
+}
+
+.footnotes li em {
+  color: var(--text);
+  font-style: normal;
+}
+
+/* Margin note: sits alongside the prose column on wide viewports, and
+   folds inline as an aside on narrow ones. */
+.note {
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--mark);
+  padding-left: var(--space-s);
+  max-width: var(--measure-tight);
+}
+
+.note__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: 0.4em;
+}
+
+.note--quiet {
+  border-left-color: var(--border-strong);
+}
+
+.note--quiet .note__label {
+  color: var(--text-meta);
+}
+
+/* =====================================================================
+   9. CALLOUT AND PULL QUOTE
+   ===================================================================== */
+.callout {
+  background-color: var(--bg-raised);
+  border: var(--rule-hairline) solid var(--border);
+  border-left: 3px solid var(--mark);
+  border-radius: var(--radius-1);
+  padding: var(--space-m);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: var(--measure-wide);
+}
+
+.callout__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: 0.5em;
+}
+
+.pullquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "wght" 300, "SOFT" 0, "WONK" 1;
+  font-size: var(--step-3);
+  line-height: 1.22;
+  letter-spacing: -0.012em;
+  color: var(--text);
+  max-width: 34ch;
+  text-wrap: balance;
+}
+
+.pullquote cite {
+  display: block;
+  margin-top: var(--space-s);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-style: normal;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+/* =====================================================================
+   10. STATS, TIMELINE, CHART
+   ===================================================================== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--space-m);
+}
+
+.stat {
+  border-top: 2px solid var(--mark);
+  padding-top: var(--space-xs);
+  display: grid;
+  gap: 0.2em;
+}
+
+.stat__num {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "wght" 400, "SOFT" 0, "WONK" 1;
+  font-size: var(--step-4);
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.stat__unit {
+  font-size: 0.4em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-meta);
+  margin-left: 0.25em;
+}
+
+.stat__label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  display: grid;
+  gap: var(--space-m);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.3rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 1px;
+  background-color: var(--border);
+}
+
+.timeline li {
+  position: relative;
+  padding-left: var(--space-l);
+  margin-top: 0;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: var(--bg);
+  border: 1.5px solid var(--mark);
+  transform: rotate(45deg);
+}
+
+.timeline__when {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.timeline__what {
+  font-size: var(--step-0);
+}
+
+.timeline__note {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chart__grid line {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.chart__baseline {
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.chart__axis {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  fill: var(--ink-500);
+}
+
+.chart__bar {
+  fill: var(--series-1);
+}
+
+.chart__bar--alt {
+  fill: var(--series-2);
+}
+
+.chart__line {
+  fill: none;
+  stroke: var(--series-1);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.chart__area {
+  fill: var(--series-1);
+  opacity: 0.1;
+}
+
+.chart__point {
+  fill: var(--series-2);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+  list-style: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 0;
+}
+
+.legend__swatch {
+  width: 0.7em;
+  height: 0.7em;
+}
+
+/* =====================================================================
+   11. PAGER AND TABLE OF CONTENTS
+   ===================================================================== */
+.pager {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--space-m);
+  border-top: var(--rule-hairline) solid var(--border);
+  padding-top: var(--space-l);
+}
+
+.pager__item {
+  display: grid;
+  gap: 0.35em;
+  text-decoration: none;
+  color: inherit;
+  padding: var(--space-s);
+  border: var(--rule-hairline) solid transparent;
+  border-radius: var(--radius-2);
+  transition: border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+
+.pager__item:hover {
+  border-color: var(--border);
+  background-color: var(--bg-raised);
+  color: inherit;
+}
+
+.pager__dir {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+
+.pager__title {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.2;
+}
+
+.pager__item--next {
+  text-align: right;
+}
+
+.toc {
+  border-top: var(--rule-hairline) solid var(--border);
+  border-bottom: var(--rule-hairline) solid var(--border);
+  padding-block: var(--space-m);
+  font-size: var(--step--1);
+}
+
+.toc__title {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-bottom: var(--space-s);
+}
+
+.toc ol {
+  list-style: none;
+  padding: 0;
+  counter-reset: toc;
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.toc li {
+  counter-increment: toc;
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  gap: var(--space-2xs);
+  margin-top: 0;
+}
+
+.toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--mark);
+}
+
+.toc a {
+  text-decoration-color: var(--border);
+}
+
+.toc a:hover {
+  text-decoration-color: var(--underline-hover);
+}
+
+/* =====================================================================
+   12. SITE FOOTER
+   ===================================================================== */
+.site-footer {
+  margin-top: var(--space-3xl);
+  border-top: var(--rule-hairline) solid var(--border);
+}
+
+.site-footer__body {
+  padding-block: var(--space-2xl);
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+}
+
+@media (max-width: 48rem) {
+  .site-footer__body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.site-footer__wordmark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.site-footer__mark {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.site-footer__colophon {
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: var(--measure-tight);
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--space-m);
+}
+
+.footer-nav__title {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-bottom: var(--space-xs);
+}
+
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2xs);
+  font-size: var(--step--1);
+}
+
+.footer-nav li {
+  margin-top: 0;
+}
+
+.site-footer__legal {
+  border-top: var(--rule-hairline) solid var(--border-faint);
+  padding-block: var(--space-m);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s) var(--space-m);
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+}
+
+/* =====================================================================
+   13. LIGHTBOX (progressive enhancement over a plain link)
+   ===================================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: none;
+  place-items: center;
+  padding: var(--space-m);
+  background-color: color-mix(in srgb, var(--indigo-deep) 82%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+.lightbox[open],
+.lightbox.is-open {
+  display: grid;
+}
+
+.lightbox__figure {
+  max-width: min(92vw, 68rem);
+  max-height: 88vh;
+  display: grid;
+  gap: var(--space-s);
+}
+
+.lightbox__img {
+  width: 100%;
+  height: auto;
+  max-height: 76vh;
+  object-fit: contain;
+  background-color: var(--bg-sunken);
+  border: var(--rule-hairline) solid var(--border-strong);
+}
+
+.lightbox__caption {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mono);
+  color: var(--paper-1);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: var(--space-m);
+  right: var(--space-m);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  background-color: var(--paper-0);
+  color: var(--indigo-deep);
+  border: 0;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.lightbox__close:hover {
+  background-color: var(--terracotta);
+  color: var(--paper-0);
+}
+
+/* =====================================================================
+   14. TAGS ON A CRAFT / HIKE ENTRY
+   ===================================================================== */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--space-l);
+}
+
+.board__item {
+  display: grid;
+  gap: var(--space-s);
+  align-content: start;
+}
+
+.board__caption {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.3em;
+  font-size: var(--step-0);
+  color: var(--text-secondary);
+}
+
+.board__title {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 1.25;
+}
+
+.board__meta {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-meta);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* =====================================================================
+   15. FILL-IN SLOTS
+   Content the site's owner has not supplied yet is rendered inside a
+   .slot: a dashed, filled box that reads as a form field rather than as
+   copy. Nothing invented should ever appear outside one. .fill marks a
+   single field inside running prose or standing in for a table cell.
+
+   Finishing a page means replacing the whole .slot element with real
+   content and deleting the .fill spans. README.md lists every one.
+   ===================================================================== */
+.slot {
+  padding: var(--space-m);
+  background-color: var(--bg-raised);
+  border: var(--rule-hairline) dashed var(--border-strong);
+  border-radius: var(--radius-1);
+  color: var(--text-secondary);
+}
+
+.slot__label {
+  display: block;
+  margin-bottom: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--mark);
+}
+
+/* The slot is a self-contained block, so it resets the prose flow its
+   own contents would otherwise inherit from .prose > * + *. */
+.slot :where(p, ul, ol, dl) {
+  margin-block: 0;
+}
+
+.slot :where(p, ul, ol, dl) + :where(p, ul, ol, dl) {
+  margin-top: var(--space-2xs);
+}
+
+.slot :where(ul, ol) {
+  padding-left: 1.25em;
+}
+
+.slot li + li {
+  margin-top: var(--space-3xs);
+}
+
+/* A single field to fill in: inside prose, or in place of a table cell.
+
+   Doubled class on purpose. .fill is a utility marker that has to win
+   wherever it lands, and several components style their own text with a
+   class-plus-element selector — .spec dd, .page-head__meta span, and
+   others. At (0,2,0) this beats all of those; a single .fill is (0,1,0)
+   and loses, which renders the field as ordinary body copy. */
+.fill.fill {
+  font-family: var(--font-mono);
+  font-size: 0.94em;
+  color: var(--mark-strong);
+  border-bottom: 1px dashed var(--border-strong);
+  overflow-wrap: break-word;
+}
+
+/* An index entry with no content behind it yet. */
+.entry--slot {
+  padding-inline: var(--space-m);
+  background-color: var(--bg-raised);
+  outline: var(--rule-hairline) dashed var(--border-strong);
+  outline-offset: -1px;
+}
+
+.entry--slot .entry__body {
+  color: var(--text-secondary);
+}
+
+/* A card whose content has not been supplied yet: same box, dashed edge. */
+.card--slot {
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+
+.card--slot:hover {
+  transform: none;
+  box-shadow: none;
+}

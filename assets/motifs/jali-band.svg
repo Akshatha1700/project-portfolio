@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <!-- Jali (perforated screen) tile: two squares of equal circumradius
+       produce the eight-point star. Hairline weight only, so the band reads
+       as a perforation rather than as decoration. -->
+  <g fill="none" stroke="#B7A98C" stroke-width="1">
+    <path d="M12 0.5 L23.5 12 L12 23.5 L0.5 12 Z"/>
+    <rect x="3.87" y="3.87" width="16.26" height="16.26"/>
+  </g>
+  <g fill="#A98443">
+    <circle cx="3" cy="3" r="1"/>
+    <circle cx="21" cy="3" r="1"/>
+    <circle cx="3" cy="21" r="1"/>
+    <circle cx="21" cy="21" r="1"/>
+  </g>
+</svg>

@@ -1,0 +1,204 @@
+/* =====================================================================
+   tokens.css — the single source of truth for colour, type and rhythm.
+   Loaded first. Nothing in this file depends on any other file.
+
+   TO RE-THEME THE SITE: every colour below resolves from the block marked
+   "RAW PALETTE". Change those twelve values and the whole site follows.
+   ===================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* -------------------------------------------------------------------
+     RAW PALETTE — warm paper and ink, all low saturation.
+     Indigo, terracotta and ochre are Indian cloth-dye colours at roughly
+     half their usual chroma, so they read as pigment on paper rather
+     than as festival colour.
+     ------------------------------------------------------------------- */
+  --paper-0: #f7f3e9; /* page ground — sandalwood */
+  --paper-1: #f1ebdc; /* raised surfaces */
+  --paper-2: #e7dfcb; /* sunken surfaces, plate mats */
+  --paper-3: #ded3ba; /* deepest well, chart plots */
+
+  --ink-900: #22212c; /* headings and body */
+  --ink-700: #4e4a5c; /* secondary prose */
+  /* ink-500 is small text (captions, eyebrows, metadata) and must clear
+     4.5:1 against paper, card and mat grounds. The lighter #837d93 this
+     started as measured 3.6:1 and was darkened to pass. */
+  --ink-500: #625c70; /* captions, metadata, placeholders — 5.8:1 on paper */
+  --ink-300: #ada6b5; /* disabled state only, never used for running text */
+
+  --indigo: #36406b; /* links, headings, structure */
+  --indigo-deep: #262e4e; /* focus rings, selection, solid marks */
+  --indigo-soft: #6b739b; /* chart series, inactive state */
+
+  /* terracotta and olive are used for small text (numerals, labels, chips),
+     so they are held at >=4.5:1 on paper AND on the card ground. Both were
+     darkened from #9e6448 / #6c7050, which measured 4.3:1. */
+  --terracotta: #8a5234; /* the accent mark: numerals, nodes, marks — 5.7:1 */
+  --terracotta-deep: #7e4d36; /* hover / pressed terracotta */
+
+  --ochre: #a98443; /* hover rules and underlines only — never text */
+  --olive: #5e6244; /* chart series, chips — 5.7:1 on paper */
+  --copper: #8e6a52; /* chart series, graphic use only */
+
+  --rule-faint: #e3dac6;
+  --rule: #d3c8b1;
+  --rule-strong: #b7a98c;
+
+  /* -------------------------------------------------------------------
+     SEMANTIC COLOUR — components consume only these.
+     ------------------------------------------------------------------- */
+  --bg: var(--paper-0);
+  --bg-raised: var(--paper-1);
+  --bg-sunken: var(--paper-2);
+  --bg-well: var(--paper-3);
+
+  --text: var(--ink-900);
+  --text-secondary: var(--ink-700);
+  --text-meta: var(--ink-500);
+  --text-disabled: var(--ink-300);
+
+  --border-faint: var(--rule-faint);
+  --border: var(--rule);
+  --border-strong: var(--rule-strong);
+
+  --link: var(--indigo);
+  --link-hover: var(--indigo-deep);
+  --underline: var(--rule-strong);
+  --underline-hover: var(--ochre);
+
+  --mark: var(--terracotta);
+  --mark-strong: var(--terracotta-deep);
+  --accent-rule: var(--ochre);
+
+  --focus-ring: var(--indigo-deep);
+  --selection-bg: var(--indigo-deep);
+  --selection-fg: var(--paper-0);
+
+  /* chart series, in draw order */
+  --series-1: var(--indigo);
+  --series-2: var(--terracotta);
+  --series-3: var(--olive);
+  --series-4: var(--copper);
+  --series-5: var(--indigo-soft);
+
+  /* -------------------------------------------------------------------
+     TYPE
+     Fraunces carries optical size, weight, SOFT and WONK axes — the WONK
+     axis is what gives the display cuts their slightly wonky f and g.
+     The *Fallback faces are declared in base.css with metric overrides so
+     the swap-in does not move the layout.
+     ------------------------------------------------------------------- */
+  --font-display: "Fraunces", "Fraunces Fallback", Georgia, "Times New Roman", serif;
+  --font-text: "Manrope", "Manrope Fallback", system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "IBM Plex Mono Fallback", ui-monospace,
+    "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+
+  /* fluid scale: 360px viewport -> 1440px viewport, ratio ~1.23 */
+  --step--2: clamp(0.700rem, 0.679rem + 0.006vw, 0.763rem); /* 11.2 -> 12.2 */
+  --step--1: clamp(0.825rem, 0.796rem + 0.008vw, 0.913rem); /* 13.2 -> 14.6 */
+  --step-0: clamp(1.031rem, 0.996rem + 0.010vw, 1.138rem); /* 16.5 -> 18.2 */
+  --step-1: clamp(1.219rem, 1.159rem + 0.017vw, 1.400rem); /* 19.5 -> 22.4 */
+  --step-2: clamp(1.450rem, 1.358rem + 0.025vw, 1.725rem); /* 23.2 -> 27.6 */
+  --step-3: clamp(1.719rem, 1.584rem + 0.038vw, 2.125rem); /* 27.5 -> 34.0 */
+  --step-4: clamp(2.031rem, 1.833rem + 0.055vw, 2.625rem); /* 32.5 -> 42.0 */
+  --step-5: clamp(2.406rem, 2.125rem + 0.078vw, 3.250rem); /* 38.5 -> 52.0 */
+  --step-6: clamp(2.844rem, 2.459rem + 0.107vw, 4.000rem); /* 45.5 -> 64.0 */
+  --step-7: clamp(3.375rem, 2.875rem + 0.139vw, 4.875rem); /* 54.0 -> 78.0 */
+
+  --leading-display: 1.04;
+  --leading-heading: 1.16;
+  --leading-ui: 1.4;
+  --leading-body: 1.62;
+
+  --tracking-display: -0.018em;
+  --tracking-heading: -0.008em;
+  --tracking-normal: 0;
+  --tracking-label: 0.14em; /* eyebrows and small caps */
+  --tracking-mono: 0.02em;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --measure-prose: 66ch;
+  --measure-tight: 44ch;
+  --measure-wide: 78ch;
+
+  /* -------------------------------------------------------------------
+     SPACE — a 4px-derived ladder. Sizes are used by role, not by number.
+     ------------------------------------------------------------------- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 6.5rem;
+  --space-4xl: 9rem;
+
+  /* -------------------------------------------------------------------
+     LAYOUT
+     ------------------------------------------------------------------- */
+  --wrap-max: 76rem;
+  --wrap-wide: 90rem;
+  --wrap-narrow: 52rem;
+  --gutter: clamp(1.25rem, 4.4vw, 3.5rem);
+  --header-h: 4.75rem;
+  --rule-hairline: 1px;
+  --rule-motif-h: 1.5rem; /* height of the kolam rule band */
+
+  --radius-1: 2px; /* near-square on purpose: this is an editorial site */
+  --radius-2: 4px;
+  --radius-3: 8px;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgba(34, 33, 44, 0.05), 0 2px 8px rgba(34, 33, 44, 0.04);
+  --shadow-2: 0 2px 4px rgba(34, 33, 44, 0.06), 0 14px 30px rgba(34, 33, 44, 0.07);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+  /* -------------------------------------------------------------------
+     MOTION
+     ------------------------------------------------------------------- */
+  --dur-1: 120ms;
+  --dur-2: 240ms;
+  --dur-3: 480ms;
+  --dur-4: 900ms;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+  /* -------------------------------------------------------------------
+     TEXTURE / DEPTH
+     ------------------------------------------------------------------- */
+  --grain-opacity: 0.035;
+  --grain-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  --jali-band: url("../motifs/jali-band.svg");
+  --kolam-rule: url("../motifs/kolam-rule.svg");
+  --star-mark: url("../img/monogram.svg");
+
+  /* -------------------------------------------------------------------
+     STACKING ORDER — named, so nothing guesses a magic number.
+     ------------------------------------------------------------------- */
+  --z-base: 1;
+  --z-grain: 90;
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-lightbox: 300;
+}
+
+/* A denser default on very small screens: the type scale already handles
+   size, so only the vertical rhythm needs pulling in. */
+@media (max-width: 30rem) {
+  :root {
+    --space-2xl: 3.25rem;
+    --space-3xl: 4.25rem;
+    --space-4xl: 5.5rem;
+  }
+}
